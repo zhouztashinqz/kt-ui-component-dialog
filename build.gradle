@@ -1,0 +1,46 @@
+apply plugin: 'com.android.library'
+apply from: "conlib.gradle"
+apply from: "conproject.gradle"
+apply plugin: 'com.github.dcendents.android-maven'
+
+android {
+    compileSdkVersion buildconfig.compileSdkVersion
+    buildToolsVersion buildconfig.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion buildconfig.minSdkVersion
+        targetSdkVersion buildconfig.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+    }
+    compileOptions.encoding = 'utf-8' // write your encoding here
+
+}
+
+dependencies {
+    implementation googlelib.support_v7
+
+}
+
+buildscript {
+
+    repositories {
+        mavenCentral()
+        google()
+        jcenter()
+        maven { url "https://jitpack.io" }
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.0.1'
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.0'
+    }
+}
+
+tasks.withType(Javadoc) {
+    options.addStringOption('Xdoclint:none', '-quiet')
+    options.addStringOption('encoding', 'UTF-8')
+    options.addStringOption('charSet', 'UTF-8')
+}
+repositories {
+    google()
+}
