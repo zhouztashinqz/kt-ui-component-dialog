@@ -1,8 +1,6 @@
 apply plugin: 'com.android.library'
 apply from: "conlib.gradle"
 apply from: "conproject.gradle"
-apply plugin: 'com.github.dcendents.android-maven'
-
 android {
     compileSdkVersion buildconfig.compileSdkVersion
     buildToolsVersion buildconfig.buildToolsVersion
@@ -32,7 +30,6 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.0.1'
-        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.0'
     }
 }
 
