@@ -1,13 +1,14 @@
 apply plugin: 'com.android.library'
 apply from: "conlib.gradle"
 apply from: "conproject.gradle"
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-android'
 android {
     compileSdkVersion buildconfig.compileSdkVersion
     buildToolsVersion buildconfig.buildToolsVersion
 
     defaultConfig {
         minSdkVersion buildconfig.minSdkVersion
-        targetSdkVersion buildconfig.targetSdkVersion
         versionCode 1
         versionName "1.0"
     }
@@ -17,6 +18,7 @@ android {
 
 dependencies {
     implementation googlelib.support_v7
+    implementation googlelib.kotlin
 
 }
 
