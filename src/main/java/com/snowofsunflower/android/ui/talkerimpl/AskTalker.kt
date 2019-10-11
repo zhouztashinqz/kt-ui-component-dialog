@@ -7,6 +7,9 @@ import com.snowofsunflower.android.ui.talker.Reactor
 import com.yarolegovich.lovelydialog.LovelyStandardDialog
 import com.yarolegovich.lovelydialog.R
 
+/**
+ * 提问对话框实现类
+ */
 class AskTalker(activity: Activity) : IAskTalker {
 
     private val mDialog = LovelyStandardDialog(activity,

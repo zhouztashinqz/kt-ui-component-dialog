@@ -2,7 +2,7 @@ package com.snowofsunflower.android.ui.talker;
 
 /**
  * Created by zhouztashin on 2018/10/21.
- * Dialog
+ * 对话框接口
  */
 
 //dialog.action(Hold).title(title).question(question).hold();//边界清晰
@@ -15,7 +15,7 @@ package com.snowofsunflower.android.ui.talker;
 interface ITalker {
 
     /**
-     * talk about,as well as dialog's title
+     * 对话框标题
      *
      * @param str
      */
@@ -24,13 +24,13 @@ interface ITalker {
 
     /**
      *
-     * talk on ,as well as dialog's show()
+     * 显示对话框
      */
     fun on(): ITalker
 
     /**
      *
-     * talk off,as well as dialog's dismiss()
+     * t关闭对话框
      */
     fun off(): ITalker
 

@@ -6,6 +6,9 @@ import com.snowofsunflower.android.ui.talker.ITalker
 import com.snowofsunflower.android.ui.talker.Reactor
 import com.yarolegovich.lovelydialog.LovelyInfoDialog
 
+/**
+ *提示对话框
+ */
 class PromptTalker(activity: Activity) : IPromptTalker {
 
     val mDialog = LovelyInfoDialog(activity)

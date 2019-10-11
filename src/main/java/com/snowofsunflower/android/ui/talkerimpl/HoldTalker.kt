@@ -5,6 +5,9 @@ import com.snowofsunflower.android.ui.talker.IHoldTalker
 import com.snowofsunflower.android.ui.talker.ITalker
 import com.yarolegovich.lovelydialog.LovelyProgressDialog
 
+/**
+ * 等待对话框实现类
+ */
 class HoldTalker(activity: Activity) : IHoldTalker {
 
     private val mDialog: LovelyProgressDialog = LovelyProgressDialog(activity)
