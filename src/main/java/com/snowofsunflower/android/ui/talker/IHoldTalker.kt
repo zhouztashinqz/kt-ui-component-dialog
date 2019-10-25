@@ -5,7 +5,7 @@ package com.snowofsunflower.android.ui.talker;
  * 等待对话框
  */
 
-interface IHoldTalker : ITalker {
+interface IHoldTalker : ITalker<IHoldTalker> {
 
     /**
      * 提示内容

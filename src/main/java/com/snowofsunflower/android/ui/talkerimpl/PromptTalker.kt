@@ -1,9 +1,9 @@
 package com.snowofsunflower.android.ui.talkerimpl
 
 import android.app.Activity
+import android.view.View
+import android.widget.Button
 import com.snowofsunflower.android.ui.talker.IPromptTalker
-import com.snowofsunflower.android.ui.talker.ITalker
-import com.snowofsunflower.android.ui.talker.Reactor
 import com.yarolegovich.lovelydialog.LovelyInfoDialog
 
 /**
@@ -11,11 +11,16 @@ import com.yarolegovich.lovelydialog.LovelyInfoDialog
  */
 class PromptTalker(activity: Activity) : IPromptTalker {
 
-    val mDialog = LovelyInfoDialog(activity)
+    override fun isOn(): Boolean = mDialog.create().isShowing
+
+    private val mDialog = LovelyInfoDialog(activity)
 
 
-    override fun reactor(reactor: Reactor): IPromptTalker {
-        //TODO REACTOR
+    override fun reactor(reactor: (v: View, talker: IPromptTalker) -> Unit): IPromptTalker {
+        val confirmButton = mDialog.create().findViewById<Button>(com.yarolegovich.lovelydialog.R.id.ld_btn_confirm)
+        confirmButton.setOnClickListener {
+            reactor(it, this@PromptTalker)
+        }
         return this
     }
 
@@ -29,17 +34,17 @@ class PromptTalker(activity: Activity) : IPromptTalker {
         return this
     }
 
-    override fun about(str: String): ITalker {
+    override fun about(str: String): IPromptTalker {
         mDialog.setTitle(str)
         return this
     }
 
-    override fun on(): ITalker {
+    override fun on(): IPromptTalker {
         mDialog.show()
         return this
     }
 
-    override fun off(): ITalker {
+    override fun off(): IPromptTalker {
         mDialog.dismiss()
         return this
     }

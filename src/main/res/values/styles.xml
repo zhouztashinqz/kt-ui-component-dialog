@@ -11,4 +11,17 @@
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">?android:textColorPrimary</item>
     </style>
+
+    <!-- 对话框 -->
+    <style name="dialog">
+        <item name="android:windowBackground">@color/transparent</item><!--使布局背景颜色透明-->
+        <item name="android:windowNoTitle">true</item><!--无标题-->
+        <item name="android:layout_gravity">center</item><!--使控件居中-->
+        <item name="android:backgroundDimEnabled">true</item><!--模糊-->
+        <item name="android:windowIsTranslucent">false</item><!--true处理启动时黑屏，但导致启动app慢-->
+        <item name="android:windowLightStatusBar">true</item><!--背景颜色强制设为亮色-->
+        <item name="android:statusBarColor">@color/transparent</item>
+    </style>
 </resources>
+
+

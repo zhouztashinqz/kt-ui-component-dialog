@@ -7,6 +7,7 @@ import android.view.View;
  * 对话框回调
  */
 
+@Deprecated("通过高阶函数代替")
 interface Reactor {
-    fun react(v: View, talker: ITalker)
+    fun react(v: View, talker: ITalker<*>)
 }

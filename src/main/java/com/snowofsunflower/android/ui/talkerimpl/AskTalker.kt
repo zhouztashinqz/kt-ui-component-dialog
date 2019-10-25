@@ -1,19 +1,31 @@
 package com.snowofsunflower.android.ui.talkerimpl
 
 import android.app.Activity
+import android.view.View
+import com.enjoy.dialog.R
 import com.snowofsunflower.android.ui.talker.IAskTalker
-import com.snowofsunflower.android.ui.talker.ITalker
-import com.snowofsunflower.android.ui.talker.Reactor
 import com.yarolegovich.lovelydialog.LovelyStandardDialog
-import com.yarolegovich.lovelydialog.R
 
 /**
  * 提问对话框实现类
  */
-class AskTalker(activity: Activity) : IAskTalker {
+class AskTalker(private val mActivity: Activity) : IAskTalker {
+    override fun about(str: String): IAskTalker {
+        mDialog.setTitle(str)
+        return this
+    }
 
-    private val mDialog = LovelyStandardDialog(activity,
-            LovelyStandardDialog.ButtonLayout.HORIZONTAL)
+    override fun isOn(): Boolean = mDialog.create().isShowing
+    //Done 更改为相应的函数类型？
+    var mYesClickListener: ((View, IAskTalker) -> Unit)? = null
+    var mNoClickListener: ((View, IAskTalker) -> Unit)? = null
+    var mYesText: String? = null
+    var mNoText: String? = null
+
+    private val mDialog = LovelyStandardDialog(
+            mActivity,
+            LovelyStandardDialog.ButtonLayout.HORIZONTAL
+    )
 
     init {
         mDialog.setNegativeButton(R.string.cancel, null)
@@ -24,41 +36,57 @@ class AskTalker(activity: Activity) : IAskTalker {
         return this
     }
 
-    override fun yes(reactor: Reactor): IAskTalker {
-        mDialog.setPositiveButton(R.string.ok) {
-            reactor.react(it, this@AskTalker)
-        }
+    override fun yes(reactor: (v: View, talker: IAskTalker) -> Unit): IAskTalker {
+        mYesClickListener = reactor
         return this
     }
 
-    override fun no(reactor: Reactor): IAskTalker {
-        mDialog.setNegativeButton(R.string.cancel) {
-            reactor.react(it, this@AskTalker)
-        }
+    override fun no(reactor: (v: View, talker: IAskTalker) -> Unit): IAskTalker {
+        mNoClickListener = reactor
         return this
     }
 
     override fun yesText(text: String): IAskTalker {
-        mDialog.setPositiveButtonText(text)
+        mYesText = text
+        //  mDialog.setPositiveButtonText(text)
         return this
     }
 
     override fun noText(text: String): IAskTalker {
-        mDialog.setNegativeButtonText(text)
+        mNoText = text
+        // mDialog.setNegativeButtonText(text)
         return this
     }
 
-    override fun about(str: String): IAskTalker {
+    /*  override fun  about(str: String): AskTalker {
+          mDialog.setTitle(str)
+          return this
+      }*/
+    /*override fun about(str: String): ITalker {
         mDialog.setTitle(str)
         return this
     }
+*/
+    override fun on(): IAskTalker {
+        val yesText = mYesText ?: mActivity.getString(R.string.ok)
+        mYesClickListener?.run {
+            mDialog.setPositiveButton(yesText) {
+                this(it, this@AskTalker)
+            }
+        } ?: mDialog.setPositiveButton(yesText, null)
 
-    override fun on(): ITalker {
+        val noText = mNoText ?: mActivity.getString(R.string.cancel)
+        mNoClickListener?.run {
+            mDialog.setNegativeButton(mNoText) {
+                this(it, this@AskTalker)
+            }
+        } ?: mDialog.setNegativeButton(noText, null)
+
         mDialog.show()
         return this
     }
 
-    override fun off(): ITalker {
+    override fun off(): IAskTalker {
         mDialog.dismiss()
         return this
     }

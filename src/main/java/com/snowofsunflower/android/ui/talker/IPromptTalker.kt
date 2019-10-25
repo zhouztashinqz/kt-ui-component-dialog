@@ -1,15 +1,17 @@
 package com.snowofsunflower.android.ui.talker
 
+import android.view.View
+
 /**
  * Created by zhouztashin on 2018/10/21.
  * 提示对话框
  */
 
-interface IPromptTalker : ITalker {
+interface IPromptTalker : ITalker<IPromptTalker> {
     /**
      * 提示按钮响应
      */
-    fun reactor(reactor: Reactor): IPromptTalker
+    fun reactor(reactor: (v: View, talker: IPromptTalker) -> Unit): IPromptTalker
 
     /**
      * 提问详情

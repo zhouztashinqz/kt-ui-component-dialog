@@ -1,11 +1,13 @@
 package com.snowofsunflower.android.ui.talker;
 
+import android.view.View
+
 /**
  * Created by zhouztashin on 2018/10/21.
  * 提问对话框
  */
 
-interface IAskTalker : ITalker {
+interface IAskTalker : ITalker<IAskTalker> {
     /**
      * 问题
      */
@@ -14,12 +16,12 @@ interface IAskTalker : ITalker {
     /**
      * 确认回调
      */
-    fun yes(reactor: Reactor): IAskTalker
+    fun yes(reactor: (v: View, talker: IAskTalker) -> Unit): IAskTalker
 
     /**
      * 否认回调
      */
-    fun no(reactor: Reactor): IAskTalker
+    fun no(reactor: (v: View, talker: IAskTalker) -> Unit): IAskTalker
 
     /**
      * 确认文本

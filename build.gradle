@@ -1,8 +1,7 @@
 apply plugin: 'com.android.library'
-apply from: "conlib.gradle"
-apply from: "conproject.gradle"
-apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
 android {
     compileSdkVersion buildconfig.compileSdkVersion
     buildToolsVersion buildconfig.buildToolsVersion
@@ -19,6 +18,7 @@ android {
 dependencies {
     implementation googlelib.support_v7
     implementation googlelib.kotlin
+    compile 'com.yarolegovich:lovely-dialog:1.1.0'
 
 }
 
